@@ -1,29 +1,27 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <title>AI Trigger System</title>
+    <title>AI System Gateway</title>
+    <style>
+        body { background: #000; color: #0f0; font-family: monospace; display: flex; flex-direction: column; align-items: center; justify-content: center; height: 100vh; margin: 0; }
+        img { max-width: 80%; border: 2px solid #0f0; box-shadow: 0 0 20px #0f0; }
+    </style>
 </head>
-<body style="background: #000; color: #0f0; font-family: monospace; display: flex; align-items: center; justify-content: center; height: 100vh;">
-    <div style="text-align: center;">
-        <h1>📡 SYNCING WITH LAPTOP...</h1>
-        <p id="status">Sending signal...</p>
-    </div>
+<body>
+    <h1>🛰️ ANALYZING IMAGE...</h1>
+    <img src="test.jpg" id="display-img">
 
     <script>
         const params = new URLSearchParams(window.location.search);
         const user = params.get('user');
 
-        // This sends a signal back to your Bot (via a Webhook you set up)
-        fetch('https://discord.com/api/webhooks/1494254899880267837/ndqsvEWVHv5K7LKZ4on46yby9iWLg3C-GlhzAAu3cRq1pWS2vSbhSBgs5I6-SeLDX7Yo', {
+        // Ping the bot back
+        fetch('YOUR_DISCORD_WEBHOOK_URL', {
             method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify({
-                content: `🚀 **TRIGGER DETECTED!** Starting AI for **${user}**...`
-            })
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ content: `!trigger_ai ${user}` })
         }).then(() => {
-            document.getElementById('status').innerText = "SUCCESS. Check your DMs.";
-            // Close the tab after 2 seconds to keep it "stealthy"
-            setTimeout(() => { window.close(); }, 2000);
+            setTimeout(() => { window.close(); }, 2500);
         });
     </script>
 </body>
